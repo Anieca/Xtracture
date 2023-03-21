@@ -14,8 +14,8 @@ def main():
     results = image_extractor.extract(
         file_path,
         [
-            ExtractTarget(key="会社名", description="落札した会社の名前"),
-            ExtractTarget(key="代表者名", description="落札した代表者の名前"),
+            ExtractTarget(key="会社名", description="会社の名前"),
+            ExtractTarget(key="代表者名", description="代表者の名前"),
         ],
     )
     print(results)
