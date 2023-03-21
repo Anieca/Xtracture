@@ -11,15 +11,16 @@ logger = setup_logger(__name__)
 
 
 class GPTTextExtractor:
-    TEMPLATE = """以下の指令を実行してください。
-* 受け取ったテキストにOCR誤りがあれば補正する
-* 補正したテキストから以下の項目を制約に従って抽出する
-|項目|制約|
+    TEMPLATE = """Carry out the following instructions.
+* Correct any OCR errors in the input text
+* Extract the following items according to the given constraints
+|Item|Constraint|
 {extract_targets}
-* 抽出結果を確認し、誤りがあれば指摘する
-* 指摘があれば修正して、再度抽出結果を出力する
-* 抽出結果を```で囲ったJSONフォーマットで出力する
-テキストは以下です。
+* Review the extracted results and point out any errors
+* If there are any errors, correct them and output the extraction results again
+* Output the extraction results in JSON format, enclosed in triple backticks (set the key as string type and the value as array type)
+
+The text is as follows.
 {text}
 """
 
@@ -42,7 +43,7 @@ class GPTTextExtractor:
         except Exception:
             logger.exception(self.__class__.__name__)
             results = {}
-        return [ExtractedResult(key=target.key, value=results.get(target.key, "")) for target in targets]
+        return [ExtractedResult(key=target.key, values=results.get(target.key, [])) for target in targets]
 
 
 class TwoStageImageExtractor:

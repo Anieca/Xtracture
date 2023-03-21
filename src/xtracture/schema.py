@@ -11,7 +11,7 @@ class ExtractTarget(BaseModel):
 
 class ExtractedResult(BaseModel):
     key: str
-    value: str
+    values: list[str]
 
 
 class IRecognizer(Protocol):
