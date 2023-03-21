@@ -10,7 +10,7 @@ def main():
     text_extractor = GPTTextExtractor()
     image_extractor = TwoStageImageExtractor(image_recognizer, text_extractor)
 
-    file_path = Path("./1474.jpg")
+    file_path = Path("./image.jpg")
     results = image_extractor.extract(
         file_path,
         [
