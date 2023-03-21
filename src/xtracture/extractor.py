@@ -24,7 +24,7 @@ The text is as follows.
 {text}
 """
 
-    def __init__(self, model_name: str = "gpt-4") -> None:
+    def __init__(self, model_name: str = "gpt-3.5-turbo") -> None:
         self.gpt = OpenAIChat(model_name=model_name, temperature=1)  # type: ignore
         self.prompt = PromptTemplate(input_variables=["extract_targets", "text"], template=self.TEMPLATE)
 
