@@ -15,7 +15,7 @@ class ExtractedResult(BaseModel):
 
 
 class IRecognizer(Protocol):
-    def recognize(self, file_path: Path) -> list[str]:
+    def recognize(self, file_path: Path, lang: str = "") -> list[str]:
         ...
 
 
