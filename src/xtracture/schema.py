@@ -6,19 +6,20 @@ from pydantic import BaseModel
 
 class ExtractTarget(BaseModel):
     key: str
-    description: str
+    description: str = ""
+    constraint: str = ""
 
 
-class ExtractedResult(BaseModel):
+class Item(BaseModel):
     key: str
     values: list[str]
 
 
-class IRecognizer(Protocol):
-    def recognize(self, file_path: Path, lang: str = "") -> list[str]:
+class ITextExtractor(Protocol):
+    def extract(self, file_path: Path, lang: str = "") -> list[str]:
         ...
 
 
-class IExtractor(Protocol):
-    def extract(self, texts: list[str], targets: list[ExtractTarget]) -> list[ExtractedResult]:
+class IItemExtractor(Protocol):
+    def extract_from_text(self, texts: list[str], targets: list[ExtractTarget]) -> list[Item]:
         ...
