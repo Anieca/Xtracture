@@ -1,3 +1,4 @@
+import json
 from typing import Any
 from pathlib import Path
 
@@ -39,7 +40,7 @@ The text is as follows.
         results: dict[str, Any]
         try:
             *_, json_output, _ = outputs.split("```")
-            results = eval(json_output.replace("json", ""))
+            results = json.loads(json_output.replace("json", ""))
         except Exception:
             logger.exception(self.__class__.__name__)
             results = {}
