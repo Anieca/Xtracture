@@ -2,7 +2,7 @@ from pathlib import Path
 from google.cloud import vision
 
 
-class MockRecognizer:
+class LambdaRecognizer:
     def recognize(self, file_path: Path) -> list[str]:
         return file_path.read_text().split("\n")
 
