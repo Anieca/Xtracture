@@ -14,11 +14,11 @@ class GPTItemExtractor:
     TEMPLATE = """Carry out the following instructions.
 * Correct any OCR errors in the input text
 * Extract the following items according to the given constraints
-|Item|Constraint|
+|Item|Description|Constraint|
 {extract_targets}
 * Review the extracted results and point out any errors
 * If there are any errors, correct them and output the extraction results again
-* Output the extraction results in JSON format, enclosed in triple backticks
+* OUTPUT the extraction results in JSON format, enclosed in triple backticks
   (set the key as string type and the value as array type)
 
 The text is as follows.
@@ -30,7 +30,7 @@ The text is as follows.
         self.prompt = PromptTemplate(input_variables=["extract_targets", "text"], template=self.TEMPLATE)
 
     def extract_from_text(self, texts: list[str], targets: list[ExtractTarget]) -> list[Item]:
-        extract_targets = "\n".join([f"|{t.key}|{t.description}|" for t in targets])
+        extract_targets = "\n".join([f"|{t.key}|{t.description}|{t.constraint}|" for t in targets])
 
         inputs = self.prompt.format(extract_targets=extract_targets, text="\n".join(texts))
         logger.info(inputs)
