@@ -1,18 +1,18 @@
 from pathlib import Path
 
-from xtracture.extractor import GPTTextExtractor, TwoStageImageExtractor
-from xtracture.recognizer import GoogleVisionRecognizer
+from xtracture.extractor import Extractor
+from xtracture.item_extractor import GPTItemExtractor
 from xtracture.schema import ExtractTarget
+from xtracture.text_extractor import GoogleVisionTextExtractor
 
 
 def main():
-    image_recognizer = GoogleVisionRecognizer()
-
-    text_extractor = GPTTextExtractor()
-    image_extractor = TwoStageImageExtractor(image_recognizer, text_extractor)
+    text_extractor = GoogleVisionTextExtractor()
+    item_extractor = GPTItemExtractor()
+    extractor = Extractor(text_extractor, item_extractor)
 
     file_path = Path("./image.jpg")
-    results = image_extractor.extract(
+    results = extractor.extract(
         file_path,
         [
             ExtractTarget(key="会社名", description="会社の名前"),
