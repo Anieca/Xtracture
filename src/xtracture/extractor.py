@@ -1,3 +1,4 @@
+import json
 from typing import Any
 from pathlib import Path
 
@@ -25,7 +26,7 @@ The text is as follows.
 """
 
     def __init__(self, model_name: str = "gpt-3.5-turbo") -> None:
-        self.gpt = OpenAIChat(model_name=model_name, temperature=1)  # type: ignore
+        self.gpt = OpenAIChat(model_name=model_name, temperature=0)  # type: ignore
         self.prompt = PromptTemplate(input_variables=["extract_targets", "text"], template=self.TEMPLATE)
 
     def extract(self, texts: list[str], targets: list[ExtractTarget]) -> list[ExtractedResult]:
@@ -39,7 +40,7 @@ The text is as follows.
         results: dict[str, Any]
         try:
             *_, json_output, _ = outputs.split("```")
-            results = eval(json_output.replace("json", ""))
+            results = json.loads(json_output.replace("json", ""))
         except Exception:
             logger.exception(self.__class__.__name__)
             results = {}
