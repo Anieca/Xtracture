@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "xtracture"
-version = "0.1.0"
-description = ""
+version = "0.2.0"
+description = "Xtracture is an open source library designed to efficiently extract arbitrary elements from documents."
 authors = ["ryo.ishii <ryoishii1101@gmail.com>"]
 readme = "README.md"
 packages = [{include = "xtracture", from = "src"}]
